@@ -1,0 +1,53 @@
+{% extends main.twig %}
+
+{% block content %}
+<nav class="panel">
+  <div class="panel-heading">
+    <div class="is-hidden-tablet">{{ __("Public rooms",'manager-for-galene-videoconference') }}</div>
+
+		<div class="columns is-size-6 is-hidden-mobile" >
+			<div class="column  is-cursor-default">
+					{{__("Room",'manager-for-galene-videoconference') }}
+			</div>
+			<div class="column  is-cursor-default">
+				{{ __("Description",'manager-for-galene-videoconference') }}
+			</div>
+			<div class="column has-text-centered is-cursor-default is-multiline is-one-third-desktop is-one-fifth-tablet">
+				{{ __("Access room as ...",'manager-for-galene-videoconference') }}
+			</div>
+		</div>
+	
+	</div>
+  
+
+  {% foreach($rooms as $room): %}
+  <label class="panel-block is-block is-active">
+	  <div class="columns" >
+		  <div class="column  is-cursor-default">
+				{{ $room->displayName }}
+		  </div>
+		  <div class="column  is-cursor-default is-size-7">
+			{{ $room->description }}
+		  </div>
+		  <div class="column columns is-multiline is-one-third-desktop is-one-fifth-tablet">
+			  <div class="column  py-1-mobile">
+				  <a class="is-underlined" href='{% echo esc_url( $room->urls['recipient']) %}' >
+					{{ __("Listener",'manager-for-galene-videoconference') }}
+				  </a>			  
+			  </div>
+			  <div class="column py-1-mobile">
+				  <a class="is-underlined" href='{% echo esc_url($room->urls['presenter']) %}' >
+					{{ __("Presenter",'manager-for-galene-videoconference') }}
+				  </a>			  			  
+			  </div>
+			  <div class="column py-1-mobile">
+				  <a class="is-underlined" href='{% echo esc_url( $room->urls['admin']) %}' >
+					{{ __("Operator",'manager-for-galene-videoconference') }}
+				  </a>			  			  
+			  </div>
+		  </div>
+	  </div>
+</label>  
+  {% endforeach; %}
+</nav>
+{% endblock %}
